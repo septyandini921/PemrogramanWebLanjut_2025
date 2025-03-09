@@ -52,7 +52,17 @@ class UserController extends Controller
         // return view('user', ['data' => $user]);
 
         //Prak 2.2 No 3 (Not found)
-        $user = UserModel::where('username', 'manager9')->firstOrFail();
-        return view('user', ['data' => $user]);
+        // $user = UserModel::where('username', 'manager9')->firstOrFail();
+        // return view('user', ['data' => $user]);
+
+        //Prak 2.3 No 1
+        // $user = UserModel::where('level_id', 2)->count();
+        // dd($user);
+        // return view('user', ['data' => $user]);
+
+        //Prak 2.3 (Menampilkan data user)
+        $userCount = UserModel::where('level_id', 2)->count();
+        return view('user', ['data' => $userCount]);
+
     }
 }
