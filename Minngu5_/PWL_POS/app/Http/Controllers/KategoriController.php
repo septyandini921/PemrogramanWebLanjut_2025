@@ -5,7 +5,6 @@ use App\Models\KategoriModel;
 use Illuminate\Http\Request;
 use App\DataTables\KategoriDataTable;
 
-
 class KategoriController extends Controller
 {
     public function index(KategoriDataTable $dataTable)
@@ -27,4 +26,21 @@ class KategoriController extends Controller
 
         return redirect('/kategori');
     }
+
+    public function edit($id)
+    {
+        $data = KategoriModel::findOrFail($id); 
+        return view('kategori.edit', ['kategori' => $data]); 
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Update data
+        KategoriModel::where('kategori_id', $id)->update([
+            'kategori_kode' => $request['kodeKategori'],
+            'kategori_nama' => $request['namaKategori']
+        ]);
+
+    }
+
 }
