@@ -33,4 +33,8 @@ Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
 
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
+//Jobsheet 5
 Route::get('/kategori', [KategoriController::class, 'index']);
+
+Route::get('/kategori/create', [KategoriController::class, 'create']);
+Route::post('/kategori', [KategoriController::class, 'store']);
