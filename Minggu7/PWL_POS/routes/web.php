@@ -49,8 +49,8 @@ Route::middleware(['auth'])->group(function() {
         Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
     });
 
-    // Level routes - hanya untuk ADMIN
-    Route::middleware(['authorize:ADM'])->group(function () {
+    // Level routes - hanya untuk ADMIN (ditambah multilevel ke manager dan staff)
+    Route::middleware(['auth', 'authorize:ADM,MNG,STF'])->group(function () {
         Route::prefix('level')->group(function () {
             Route::get('/', [LevelController::class, 'index'])->name('level.index');
             Route::post('/list', [LevelController::class, 'getLevels'])->name('level.list');
