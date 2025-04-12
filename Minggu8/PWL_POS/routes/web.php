@@ -120,7 +120,7 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('barang')->group(function (
     Route::delete('/{id}', [BarangController::class, 'destroy'])->name('barang.destroy');
     Route::get('/import', [BarangController::class, 'import']);
     Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
-    Route::get('/export_excel', [BarangController::class, 'export_excel']); // export excel
+    Route::get('/export_pdf', [BarangController::class, 'export_pdf']);// export excel
 });
 
 });
