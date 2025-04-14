@@ -8,6 +8,8 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+ 
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,14 @@ Route::post('/register', [AuthController::class, 'store_user'])->name('store_use
 
 Route::middleware(['auth'])->group(function () { // artinya semua route di dalam group ini harus login dulu
 Route::get('/', [WelcomeController::class,'index']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard'); // atau view lain yang kamu gunakan
+})->name('dashboard');
+
+
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 
 Route::middleware(['authorize:ADM,MNG,STF'])->prefix('user')->group(function (){

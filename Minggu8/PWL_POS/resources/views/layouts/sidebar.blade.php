@@ -1,4 +1,18 @@
 <div class="sidebar"> 
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="image">
+        @auth
+            @if(Auth::user()->foto)
+                <img src="{{ asset('storage/uploads/user/' . Auth::user()->foto) }}" class="img-circle elevation-2" alt="User Image" style="width: 40px; height: 40px; object-fit: cover;">
+            @else
+                <img src="{{ asset('adminlte/dist/img/default-user.png') }}" class="img-circle elevation-2" alt="User Image">
+            @endif
+        @endauth
+    </div>
+    <div class="info">
+        <a href="{{ route('profile.edit') }}" class="d-block">{{ Auth::user()->nama ?? 'User' }}</a>
+    </div>
+</div>
     <!-- SidebarSearch Form --> 
     <div class="form-inline mt-2"> 
       <div class="input-group" data-widget="sidebar-search"> 
@@ -19,6 +33,13 @@
             <p>Dashboard</p> 
           </a> 
         </li> 
+        <li class="nav-item"> 
+          <a href="{{ route('profile.edit') }}" class="nav-link {{ ($activeMenu == 'profile')? 'active' : '' }}">
+            <i class="nav-icon fas fa-user-edit"></i>
+            <p>Edit Profil</p>
+          </a>
+        </li> 
+        
         <li class="nav-header">Data Pengguna</li> 
         <li class="nav-item"> 
           <a href="{{ url('/level') }}" class="nav-link {{ ($activeMenu == 'level')? 
