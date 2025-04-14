@@ -10,6 +10,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\TransaksiController;
  
 
 /*
@@ -171,6 +172,24 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('stok')->group(function () 
     Route::post('/import_ajax', [StokController::class, 'import_ajax']);
     Route::get('/export_excel', [StokController::class, 'export_excel']);
     Route::get('/export_pdf', [StokController::class, 'export_pdf']);
+});
+
+// Tambahkan ini di dalam group middleware auth (setelah route transaksi)
+
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('transaksi')->group(function () {
+    Route::get('/', [TransaksiController::class, 'index']); // Menampilkan halaman awal transaksi
+    Route::post('/list', [TransaksiController::class, 'getPenjualan'])->name('transaksi.list'); // Menampilkan data transaksi dalam bentuk JSON untuk DataTables
+    Route::get('/create_ajax', [TransaksiController::class, 'create_ajax']); // Menampilkan halaman form tambah transaksi (Ajax)
+    Route::post('/ajax', [TransaksiController::class, 'store_ajax']); // Menyimpan data transaksi baru (Ajax)
+    Route::get('/{id}/show_ajax', [TransaksiController::class, 'show_ajax']); // Menampilkan detail transaksi (Ajax)
+    Route::get('/{id}/edit_ajax', [TransaksiController::class, 'edit_ajax']); // Menampilkan form edit transaksi (Ajax)
+    Route::put('/{id}/update_ajax', [TransaksiController::class, 'update_ajax']); // Menyimpan perubahan data transaksi (Ajax)
+    Route::get('/{id}/delete_ajax', [TransaksiController::class, 'confirm_ajax']); // Tampilkan konfirmasi hapus transaksi (Ajax)
+    Route::delete('/{id}/delete_ajax', [TransaksiController::class, 'delete_ajax']); // Hapus data transaksi (Ajax)
+    Route::get('/import', [TransaksiController::class, 'import']); // Form impor transaksi
+    Route::post('/import_ajax', [TransaksiController::class, 'import_ajax']); // Proses impor transaksi
+    Route::get('/export_excel', [TransaksiController::class, 'export_excel']); // Ekspor transaksi ke Excel
+    Route::get('/export_pdf', [TransaksiController::class, 'export_pdf']); // Ekspor transaksi ke PDF
 });
 
 });
