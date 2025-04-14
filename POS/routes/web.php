@@ -9,6 +9,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StokController;
  
 
 /*
@@ -22,14 +23,13 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-// Jobsheet 7
 Route::pattern('id', '[0-9]+'); //artinya ketika parameter {id}, maka harus berupa angka
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 
-//route W7Prak4 form register
+//form register
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store_user'])->name('store_user');
 
@@ -150,6 +150,27 @@ Route::middleware(['authorize:ADM,MNG,STF'])->prefix('barang')->group(function (
     Route::get('/import', [BarangController::class, 'import']);
     Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
     Route::get('/export_pdf', [BarangController::class, 'export_pdf']);// export excel
+});
+
+Route::middleware(['authorize:ADM,MNG,STF'])->prefix('stok')->group(function () {
+    Route::get('/', [StokController::class, 'index'])->name('stok.index');
+    Route::post('/list', [StokController::class, 'getStok'])->name('stok.list');
+    Route::get('/create', [StokController::class, 'create'])->name('stok.create');
+    Route::post('/', [StokController::class, 'store'])->name('stok.store');
+    Route::get('/create_ajax', [StokController::class, 'create_ajax']);
+    Route::post('/ajax', [StokController::class, 'store_ajax']);
+    Route::get('/{id}', [StokController::class, 'show'])->name('stok.show');
+    Route::get('/{id}/show_ajax', [StokController::class, 'show_ajax']);
+    Route::get('/{id}/edit_ajax', [StokController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [StokController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [StokController::class, 'confirm_ajax']);
+    Route::get('/{id}/edit', [StokController::class, 'edit'])->name('stok.edit');
+    Route::put('/{id}', [StokController::class, 'update'])->name('stok.update');
+    Route::delete('/{id}', [StokController::class, 'destroy'])->name('stok.destroy');
+    Route::get('/import', [StokController::class, 'import']);
+    Route::post('/import_ajax', [StokController::class, 'import_ajax']);
+    Route::get('/export_excel', [StokController::class, 'export_excel']);
+    Route::get('/export_pdf', [StokController::class, 'export_pdf']);
 });
 
 });
