@@ -51,6 +51,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>User</th>
                     <th>Kode</th>
                     <th>Pembeli</th>
                     <th>Tanggal</th>
@@ -91,6 +92,7 @@
             },
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'user_id', name: 'user_id' },
                 { data: 'penjualan_kode', name: 'penjualan_kode' },
                 { data: 'pembeli', name: 'pembeli' },
                 { data: 'penjualan_tanggal', name: 'penjualan_tanggal' },
