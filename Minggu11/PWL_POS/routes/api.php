@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Controllers\Api\RegisterController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\BarangController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +59,10 @@ Route::delete('barangs/{barang}', [BarangController::class, 'destroy']);
 
 //Jobsheet 11
 Route::post('/register1', App\Http\Controllers\Api\RegisterController::class)->name('register1');
+
+//Tugas JS11
+Route::get('transaksis', [TransaksiController::class, 'index']);
+Route::post('transaksis', [TransaksiController::class, 'store']);
+Route::get('transaksis/{transaksi}', [TransaksiController::class, 'show']);
+Route::put('transaksis/{transaksi}', [TransaksiController::class, 'update']);
+Route::delete('transaksis/{transaksi}', [TransaksiController::class, 'destroy']);
